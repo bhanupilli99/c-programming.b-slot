@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cctype>
+
+bool isValidUsername(std::string username) {
+    if (username.length() < 6 || username.length() > 12) {
+        return false;  
+    }
+
+    for (char c : username) {
+        if (!isalnum(c)) {
+            return false;  
+        }
+    }
+
+    return true;  
+}
+
+int main() {
+    std::string username, password;
+
+    std::cout << "Enter username: ";
+    std::cin >> username;
+
+    std::cout << "Enter password: ";
+    std::cin >> password;
+
+    if (isValidUsername(username)) {
+        std::cout << "Username is valid" << std::endl;
+    } else {
+        std::cout << "Username is not valid" << std::endl;
+    }
+    return 0;
+}
+
+
+

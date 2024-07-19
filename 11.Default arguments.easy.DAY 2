@@ -1,0 +1,9 @@
+#include <iostream>
+void printMessage(std::string message, std::string name = "World") {
+    std::cout << "Hello, " << name << "! " << message << std::endl;
+}
+int main() {
+    printMessage("This is a message");  
+    printMessage("This is another message", "Alice");  
+    return 0;
+}

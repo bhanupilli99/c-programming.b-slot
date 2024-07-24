@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Patient {
+protected:
+    string name;
+    int age;
+    string contactNumber;
+public:
+    Patient() {
+        cout << "Enter patient name: ";
+        cin >> name;
+        cout << "Enter patient age: ";
+        cin >> age;
+        cout << "Enter patient contact number: ";
+        cin >> contactNumber;
+    }
+    void displayPatientInfo() {
+        cout << "Patient Name: " << name << endl;
+        cout << "Patient Age: " << age << endl;
+        cout << "Patient Contact Number: " << contactNumber << endl;
+    }
+};
+
+class MedicalDetails : public Patient {
+private:
+    string disease;
+    string treatment;
+public:
+    MedicalDetails() {
+        cout << "Enter patient disease: ";
+        cin >> disease;
+        cout << "Enter patient treatment: ";
+        cin >> treatment;
+    }
+    void displayMedicalDetails() {
+        displayPatientInfo();
+        cout << "Patient Disease: " << disease << endl;
+        cout << "Patient Treatment: " << treatment << endl;
+    }
+};
+
+int main() {
+    MedicalDetails patient;
+    patient.displayMedicalDetails();
+    return 0;
+}
+
+

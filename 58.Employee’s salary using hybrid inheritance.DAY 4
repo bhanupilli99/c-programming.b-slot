@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Employee {
+protected:
+    string name;
+    int employeeID;
+public:
+    Employee(string n, int id) {
+        name = n;
+        employeeID = id;
+    }
+    void displayEmployeeInfo() {
+        cout << "Name: " << name << endl;
+        cout << "Employee ID: " << employeeID << endl;
+    }
+};
+
+class Salary {
+protected:
+    double basicSalary;
+    double allowance;
+public:
+    Salary(double bs, double al) {
+        basicSalary = bs;
+        allowance = al;
+    }
+    void displaySalaryInfo() {
+        cout << "Basic Salary: " << basicSalary << endl;
+        cout << "Allowance: " << allowance << endl;
+    }
+};
+
+class PermanentEmployee : public Employee, public Salary {
+private:
+    double pension;
+public:
+    PermanentEmployee(string n, int id, double bs, double al, double pen) 
+        : Employee(n, id), Salary(bs, al) {
+        pension = pen;
+    }
+    void displayPermanentEmployeeInfo() {
+        displayEmployeeInfo();
+        displaySalaryInfo();
+        cout << "Pension: " << pension << endl;
+    }
+};
+
+class ContractEmployee : public Employee {
+private:
+    double hourlyWage;
+public:
+    ContractEmployee(string n, int id, double hw) : Employee(n, id) {
+        hourlyWage = hw;
+    }
+    void displayContractEmployeeInfo() {
+        displayEmployeeInfo();
+        cout << "Hourly Wage: " << hourlyWage << endl;
+    }
+};
+
+int main() {
+    string name;
+    int employeeID;
+    double basicSalary, allowance, pension, hourlyWage;
+    cout << "Enter permanent employee's name: ";
+    cin >> name;
+    cout << "Enter permanent employee's ID: ";
+    cin >> employeeID;
+    cout << "Enter permanent employee's basic salary: ";
+    cin >> basicSalary;
+    cout << "Enter permanent employee's allowance: ";
+    cin >> allowance;
+    cout << "Enter permanent employee's pension: ";
+    cin >> pension;
+    PermanentEmployee permanentEmployee(name, employeeID, basicSalary, allowance, pension);
+    permanentEmployee.displayPermanentEmployeeInfo();
+    cout << "Enter contract employee's name: ";
+    cin >> name;
+    cout << "Enter contract employee's ID: ";
+    cin >> employeeID;
+    cout << "Enter contract employee's hourly wage: ";
+    cin >> hourlyWage;
+    ContractEmployee contractEmployee(name, employeeID, hourlyWage);
+    contractEmployee.displayContractEmployeeInfo();
+    return 0;
+}
+
+

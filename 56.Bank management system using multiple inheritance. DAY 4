@@ -1,0 +1,74 @@
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Account {
+protected:
+    string accountNumber;
+    double balance;
+public:
+    Account(string accNum, double bal) {
+        accountNumber = accNum;
+        balance = bal;
+    }
+    void deposit(double amount) {
+        balance += amount;
+    }
+    void withdraw(double amount) {
+        balance -= amount;
+    }
+};
+
+class Customer {
+protected:
+    string customerName;
+    string address;
+public:
+    Customer(string name, string addr) {
+        customerName = name;
+        address = addr;
+    }
+    void displayCustomerInfo() {
+        cout << "Customer Name: " << customerName << endl;
+        cout << "Address: " << address << endl;
+    }
+};
+
+class BankAccount : public Account, public Customer {
+public:
+    BankAccount(string accNum, double bal, string name, string addr) 
+        : Account(accNum, bal), Customer(name, addr) {}
+    void displayAccountInfo() {
+        displayCustomerInfo();
+        cout << "Account Number: " << accountNumber << endl;
+        cout << "Balance: " << balance << endl;
+    }
+};
+
+int main() {
+    string accNum, name, addr;
+    double bal;
+    cout << "Enter account number: ";
+    cin >> accNum;
+    cout << "Enter balance: ";
+    cin >> bal;
+    cout << "Enter customer name: ";
+    cin >> name;
+    cout << "Enter address: ";
+    cin >> addr;
+    BankAccount account(accNum, bal, name, addr);
+    account.displayAccountInfo();
+    double amount;
+    cout << "Enter amount to deposit: ";
+    cin >> amount;
+    account.deposit(amount);
+    account.displayAccountInfo();
+    cout << "Enter amount to withdraw: ";
+    cin >> amount;
+    account.withdraw(amount);
+    account.displayAccountInfo();
+    return 0;
+}
+
+

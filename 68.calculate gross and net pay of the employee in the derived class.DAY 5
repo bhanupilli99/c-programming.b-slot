@@ -1,0 +1,67 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Employee {
+protected:
+    string name;
+    int emp_id;
+    double basic_salary;
+
+public:
+    Employee(string n, int id, double salary) {
+        name = n;
+        emp_id = id;
+        basic_salary = salary;
+    }
+
+    void displayEmployee() {
+        cout << "Name: " << name << endl;
+        cout << "Emp ID: " << emp_id << endl;
+        cout << "Basic Salary: " << basic_salary << endl;
+    }
+};
+class Payroll : public Employee {
+private:
+    double gross_pay;
+    double net_pay;
+
+public:
+    Payroll(string n, int id, double salary) : Employee(n, id, salary) {
+        gross_pay = calculateGrossPay();
+        net_pay = calculateNetPay();
+    }
+
+    double calculateGrossPay() {
+        return basic_salary + (basic_salary * 0.2) + (basic_salary * 0.1);
+    }
+
+    double calculateNetPay() {
+        return gross_pay - (gross_pay * 0.1);
+    }
+
+    void displayPayroll() {
+        displayEmployee();
+        cout << "Gross Pay: " << gross_pay << endl;
+        cout << "Net Pay: " << net_pay << endl;
+    }
+};
+
+int main() {
+    string name;
+    int emp_id;
+    double basic_salary;
+
+    cout << "Enter name: ";
+    cin >> name;
+    cout << "Enter Emp ID: ";
+    cin >> emp_id;
+    cout << "Enter Basic Salary: ";
+    cin >> basic_salary;
+
+    Payroll payroll(name, emp_id, basic_salary);
+    payroll.displayPayroll();
+
+    return 0;
+}
+
+

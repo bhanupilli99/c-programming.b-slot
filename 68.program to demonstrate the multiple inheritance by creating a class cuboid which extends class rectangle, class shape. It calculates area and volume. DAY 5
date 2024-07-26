@@ -1,0 +1,59 @@
+
+#include <iostream>
+using namespace std;
+class Shape {
+public:
+    void getData() {
+        cout << "Enter length: ";
+        cin >> length;
+    }
+
+protected:
+    int length;
+};
+
+
+class Rectangle : public Shape {
+public:
+    void getData() {
+        Shape::getData();
+        cout << "Enter breadth: ";
+        cin >> breadth;
+    }
+
+    int area() {
+        return length * breadth;
+    }
+
+protected:
+    int breadth;
+};
+class Cuboid : public Rectangle {
+public:
+    void getData() {
+        Rectangle::getData();
+        cout << "Enter height: ";
+        cin >> height;
+    }
+
+    int area() {
+        return 2 * (length * breadth + breadth * height + height * length);
+    }
+
+    int volume() {
+        return length * breadth * height;
+    }
+
+private:
+    int height;
+};
+
+int main() {
+    Cuboid cuboid;
+    cuboid.getData();
+    cout << "Area: " << cuboid.area() << endl;
+    cout << "Volume: " << cuboid.volume() << endl;
+    return 0;
+}
+
+

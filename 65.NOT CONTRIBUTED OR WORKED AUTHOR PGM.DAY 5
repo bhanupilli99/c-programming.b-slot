@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+class Author {
+private:
+    string name;
+    bool hasContributed;
+public:
+    Author(string n, bool contrib) : name(n), hasContributed(contrib) {}
+    string getName() const {
+        return name;
+    }
+    bool getContributionStatus() const {
+        return hasContributed;
+    }
+};
+class Paper {
+private:
+    vector<Author> authors;
+public:
+    void addAuthor(const Author& author) {
+        authors.push_back(author);
+    }
+    void identifyNonContributor() {
+        for (const auto& author : authors) {
+            if (!author.getContributionStatus()) {
+                cout << "Author " << author.getName() << " did not contribute to the paper." << endl;
+                return;
+            }
+        }
+        cout << "All authors contributed to the paper." << endl;
+    }
+    void displayAuthors() {
+        for (const auto& author : authors) {
+            cout << "Author: " << author.getName() << ", Contribution: " << (author.getContributionStatus() ? "Yes" : "No") << endl;
+        }
+    }
+};
+int main() {
+    Paper paper;
+    paper.addAuthor(Author("Author1", true));
+    paper.addAuthor(Author("Author2", true));
+    paper.addAuthor(Author("Author3", true));
+    paper.addAuthor(Author("Author4", false)); 
+    paper.addAuthor(Author("Author5", true));
+    cout << "Authors of the paper:" << endl;
+    paper.displayAuthors();
+    cout << "\nIdentifying non-contributing author:" << endl;
+    paper.identifyNonContributor();
+    return 0;
+}

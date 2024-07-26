@@ -1,0 +1,90 @@
+
+#include <iostream>
+using namespace std;
+
+class Person {
+public:
+    string name;
+    int age;
+
+    void getData() {
+        cout << "Enter name: ";
+        cin >> name;
+        cout << "Enter age: ";
+        cin >> age;
+    }
+
+    void displayData() {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+    }
+
+    virtual void bonus() = 0;
+};
+
+class Admin : public Person {
+public:
+    string designation;
+
+    void getData() {
+        Person::getData();
+        cout << "Enter designation: ";
+        cin >> designation;
+    }
+
+    void displayData() {
+        Person::displayData();
+        cout << "Designation: " << designation << endl;
+    }
+
+    void bonus() {
+        cout << "Bonus: 1000" << endl;
+    }
+};
+
+class Account : public Person {
+public:
+    string department;
+
+    void getData() {
+        Person::getData();
+        cout << "Enter department: ";
+        cin >> department;
+    }
+
+    void displayData() {
+        Person::displayData();
+        cout << "Department: " << department << endl;
+    }
+
+    void bonus() {
+        cout << "Bonus: 500" << endl;
+    }
+};
+
+class Master : public Admin, public Account {
+public:
+    void getData() {
+        Admin::getData();
+        Account::getData();
+    }
+
+    void displayData() {
+        Admin::displayData();
+        Account::displayData();
+    }
+
+    void bonus() {
+        Admin::bonus();
+        Account::bonus();
+    }
+};
+
+int main() {
+    Master master;
+    master.getData();
+    master.displayData();
+    master.bonus();
+    return 0;
+}
+
